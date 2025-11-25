@@ -225,13 +225,27 @@
       transform: rotate(-5deg); font-weight: 700; font-size: 1rem; margin-top: 1rem; opacity: 0.9;
     }
 
-    /* --- MOBILE OPTIMIZATION --- */
+    /* --- MOBILE OPTIMIZATION (UPDATED) --- */
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      
+      /* Fix Hero Text Sizing */
       .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
       .hero-text h1 { font-size: 2.5rem; }
-      .contact-wrapper { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+      
+      /* Fix Contact Section Stacking */
+      .contact-wrapper { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+      
+      /* FORCE MAP HEIGHT ON MOBILE */
+      .map-container { 
+        width: 100%; 
+        height: 300px; /* Force height */
+        min-height: 300px; /* Double check to prevent collapse */
+        display: block;
+        margin-top: 1rem;
+      }
+      
+      .products-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       
       .cart-icon-btn {
         position: fixed; bottom: 20px; right: 20px; z-index: 1500;
@@ -358,7 +372,14 @@
           </div>
         </div>
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57903.02646367686!2d76.1386896!3d24.5388654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f8e8f7c7d6b2b%3A0x4056c4f8f8f8f8f8!2sJhalrapatan%2C%20Rajasthan%20326023!5e0!3m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57903.02646367686!2d76.1386896!3d24.5388654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f8e8f7c7d6b2b%3A0x4056c4f8f8f8f8f8!2sJhalrapatan%2C%20Rajasthan%20326023!5e0!3m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style="border:0; display: block;" 
+            allowfullscreen="" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
     </div>
@@ -660,7 +681,7 @@
       waMsg += `Please confirm and process this order.`;
 
       // 3. Open WhatsApp
-      const targetNumber = "919116567077 "; 
+      const targetNumber = "919116567077"; 
       const waUrl = `https://wa.me/${targetNumber}?text=${waMsg}`;
       
       window.open(waUrl, '_blank');
